@@ -1,19 +1,24 @@
-function minToHouers(minutes) {
-    if (minutes) {
-        return "Введіть будь ласка число";
-    }
-
-    if (minutes > 6000) {
-        return "Введіть менше 6000 хвилин";
-    }
-
-    const hours = parseInt(minutes / 60);
-    const remMinutes = minutes % 60;
-
-    return `${hours} годин ${remMinutes} хвилин`;
-}
-
-const inputMinutes = prompt("Введіть кількість хвилин:");
-const parMinutes = parseInt(inputMinutes);  
-
-console.log(minToHouers(parMinutes));
+function createCurrencyConverter(rate) {
+    return function(amount) {
+      if (amount.endsWith('USD')) {
+        const convertedAmount = parseFloat(amount.slice(0, -3)) / rate;
+        return `${convertedAmount.toFixed(2)} EUR`;
+      } else if (amount.endsWith('EUR')) {
+        const convertedAmount = parseFloat(amount.slice(0, -3)) * rate;
+        return `${convertedAmount.toFixed(2)} USD`;
+      } else {
+        return 'Invalid currency. Please provide a valid amount with either USD or EUR.';
+      }
+    };
+  }
+  
+  
+  const converter = createCurrencyConverter(0.85);
+  
+  
+  const result = converter('100 USD');
+  console.log(result);
+  
+  
+  const result = converter('100 EUR');
+  console.log(result);
